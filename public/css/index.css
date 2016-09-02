@@ -7,6 +7,7 @@
 html {
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
+  overflow: hidden;
 }
 
 html, input {
@@ -29,6 +30,16 @@ html, body {
 ul {
   list-style: none;
   word-wrap: break-word;
+}
+
+li .message{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  border-style: solid;
+  border-color: #0084FF;
+  border-radius: 25px;
 }
 
 /* Pages */
@@ -120,7 +131,6 @@ ul {
   height: 100%;
   margin: 0;
   overflow-y: scroll;
-  padding: 10px 20px 10px 20px;
 }
 
 .message.typing .messageBody {
@@ -129,7 +139,8 @@ ul {
 
 .messageBody{
   padding: 0, 0, 0, 0;
-  margin-left: 10%;
+  margin-top: 5px;
+  margin-left: 5%;
 }
 
 .username {
@@ -137,6 +148,7 @@ ul {
   overflow: hidden;
   padding-right: 15px;
   text-align: right;
+  padding-left: 20px;
 }
 
 .date {
@@ -144,6 +156,8 @@ ul {
   overflow: hidden;
   padding-right: 15px;
   text-align: left;
+  float:right;
+  margin-right: 10px;
 }
 
 /* Input */
@@ -157,5 +171,7 @@ ul {
   padding-left: 10px;
   position: absolute;
   right: 0;
-  width: 100%;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
