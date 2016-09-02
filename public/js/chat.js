@@ -91,10 +91,11 @@ $(function() {
       .text(data.username)
       .css('color', getUsernameColor(data.username));
     var date = new Date(Date.parse(data.time_created));
+
+    var ddmmyy = date.getUTCDate() + "/" + (date.getUTCMonth() + 1) + "/" + date.getUTCFullYear()
     var $messageDateDiv = $('<span class="date"/>')
-      .text(date.toUTCString())
+      .text( ddmmyy + " " + formatAMPM(date))
       .css('color', '#DCDCDC');
-    console.log(data.message);
     var $messageBodyDiv = $('<div class="messageBody">')
       .text(data.message);
     var typingClass = data.typing ? 'typing' : '';
@@ -104,6 +105,17 @@ $(function() {
       .append($usernameDiv, $messageDateDiv, $messageBodyDiv);
 
     addMessageElement($messageDiv, options);
+  }
+
+  function formatAMPM(date){
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ampm;
+    return strTime;
   }
 
   // Adds the visual chat typing message
@@ -253,13 +265,11 @@ $(function() {
 
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', function (data) {
-    console.log()
     addChatMessage(data);
   });
 
   // Whenever the server emits 'user joined', log it in the chat body
   socket.on('user joined', function (data) {
-    console.log(data.username + ' joined');
     addParticipantsMessage(data);
   });
 
@@ -282,7 +292,6 @@ $(function() {
 
   socket.on('populate messages', function (data) {
     for (i = 0; i < data.message_list.length; i++) {
-      console.log(data.message_list[i]);
       addChatMessage(data.message_list[i]);
     }
   });
